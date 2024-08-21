@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/frzb7I0d2g.jpg</file>
+        <file>icon/hotel.jpg</file>
+        <file>icon/Hotel.jpeg</file>
+        <file>icon/reservation.jpg</file>
+        <file>icon/check_in.jpg</file>
+        <file>icon/consume.jpeg</file>
+        <file>icon/one bed.jpeg</file>
+        <file>icon/best room.jpeg</file>
+        <file>icon/two bed.jpeg</file>
+        <file>icon/phone.png</file>
+    </qresource>
+</RCC>
