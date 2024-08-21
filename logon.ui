@@ -112,7 +112,7 @@ border-radius:10px;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 700 14pt &quot;微软雅黑&quot;;</string>
+         <string notr="true">font: 700 15pt &quot;微软雅黑&quot;;</string>
         </property>
        </widget>
       </item>
@@ -177,13 +177,6 @@ border-radius:10px;
      <widget class="QPushButton" name="pushButton_3">
       <property name="text">
        <string>注册</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>返回</string>
       </property>
      </widget>
     </item>

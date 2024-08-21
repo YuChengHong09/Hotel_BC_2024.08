@@ -38,9 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
    ui->price_one_bed->setValue(price_one_one_bed);
    ui->price_two_bed->setValue(price_one_two_bed);
    ui->price_bestroom->setValue(price_one_best_room);
-   if(user_type=="员工")//权限为员工。禁止编辑房间价格
-ui->change_button->setEnabled(false);
-
+   if(user_type=="员工"){//权限为员工。禁止编辑房间价格
+ui->change_button->setEnabled(false);//改变房价按钮变灰
+ui->price_one_bed->setEnabled(false);//spin box无法被编辑
+ui->price_two_bed->setEnabled(false);
+ui->price_bestroom->setEnabled(false);
+   }
 
 ui->stackedWidget->setCurrentIndex(0);
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime().addSecs(600));//预约时间默认当前时间+10分钟
@@ -54,10 +57,10 @@ ui->comboBox->addItem("双人房");
 ui->comboBox->setCurrentIndex(0);//
 
     connect(ui->lineEdit_5,QLineEdit::textChanged,this,[=](QString room){//检测输入房间名，自动生成房间类型
-    q->exec(QString("select type from room_status where room_id='%1'").arg(room));//搜索房间的类型
+    q->exec(QString("select type from room_status where room_id='%1'").arg(room));//，通过房间名搜索房间的类型
     q->next();
     QString room_type=q->value(0).toString();
-    if(room_type=="单人房")
+    if(room_type=="单人房")//下拉框自动设置为相应类型
     ui->comboBox->setCurrentIndex(1);
     else if(room_type=="双人房")
     ui->comboBox->setCurrentIndex(2);
@@ -316,17 +319,17 @@ void MainWindow::on_pushButton_7_clicked(){//转到消费页面
 
 
 
-void MainWindow::on_pushButton_9_clicked()//转到今日房况页面
+void MainWindow::on_pushButton_9_clicked()//转到今日房况页面(绘制房间布局,并根据三种房间状态，改变样式表绘制颜色,实现房间状态可视化)
 {
     ui->stackedWidget->setCurrentIndex(3);
-    q->exec("select * from room_status");
+    q->exec("select * from room_status");//查询所有房间状态
     while(q->next()){
         if(q->value("room_id").toString()=="101"){
-            if(q->value("status").toString()=="可入住")
+            // if(q->value("status").toString()=="可入住")//如果可入住则显示绿色
                 ui->room_101->setStyleSheet("background-color:green");
-            if(q->value("status").toString()=="已预约")
+            if(q->value("status").toString()=="已预约")//已预约显示黄色
                 ui->room_101->setStyleSheet("background-color:yellow");
-            if(q->value("status").toString()=="已登记")
+            if(q->value("status").toString()=="已登记")//已登记显示红色
                 ui->room_101->setStyleSheet("background-color:red");
         }
         if(q->value("room_id").toString()=="102"){
@@ -453,10 +456,10 @@ void MainWindow::on_pushButton_10_clicked()//跳转到房间价格页面
 
 void MainWindow::on_pushButton_13_clicked()//改变房价按钮
 {
-    int price_one=ui->price_one_bed->value();
+    int price_one=ui->price_one_bed->value();//提取出spin box中的价格
     int price_two=ui->price_two_bed->value();
     int price_best=ui->price_bestroom->value();
-    q->exec(QString("update room_status set price='%1' where type='单人房'").arg(price_one));
+    q->exec(QString("update room_status set price='%1' where type='单人房'").arg(price_one));//修改房间表中的价格
     q->exec(QString("update room_status set price='%1' where type='双人房'").arg(price_two));
     q->exec(QString("update room_status set price='%1' where type='豪华大床房'").arg(price_best));
     QMessageBox::information(this,"修改成功","房间价格修改成功");

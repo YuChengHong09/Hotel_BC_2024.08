@@ -7,7 +7,7 @@ namespace Ui {
 class Find_ui;
 }
 
-class Find_ui : public QWidget
+class Find_ui : public QWidget//找回密码界面
 {
     Q_OBJECT
 

@@ -9,7 +9,7 @@ enroll::enroll(QWidget *parent)
     , ui(new Ui::enroll)
 {
     ui->setupUi(this);
-    QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
+    QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");//创建数据库连接
    db.setHostName("127.0.0.1");
     db.setDatabaseName("itcase");
    db.setPort(3306);
@@ -17,7 +17,7 @@ enroll::enroll(QWidget *parent)
    db.setPassword("");
     db.open();
 
-    ui->comboBox->addItem("员工(仅可查询，无修改权限)");
+    ui->comboBox->addItem("员工(仅可查询，无修改权限)");//下拉框添加内容
     ui->comboBox->addItem("经理(可查询，有修改权限)");
     ui->comboBox->setCurrentIndex(0);
 }
@@ -27,7 +27,7 @@ enroll::~enroll()
     delete ui;
 }
 
-void enroll::on_pushButton_2_clicked()
+void enroll::on_pushButton_2_clicked()//返回按钮，跳转到登录界面
 {
     this->close();
     logon *logon_ui=new logon();
@@ -36,7 +36,7 @@ void enroll::on_pushButton_2_clicked()
 }
 
 
-void enroll::on_pushButton_clicked()
+void enroll::on_pushButton_clicked()//注册按钮
 {
     QSqlQuery *q=new QSqlQuery("itcase");
     if(ui->lineEdit->text()==""||ui->lineEdit_2->text()==""||ui->lineEdit_3->text()==""){//注册不得为空

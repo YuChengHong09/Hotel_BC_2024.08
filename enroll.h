@@ -7,7 +7,7 @@ namespace Ui {
 class enroll;
 }
 
-class enroll : public QWidget
+class enroll : public QWidget//注册界面
 {
     Q_OBJECT
 

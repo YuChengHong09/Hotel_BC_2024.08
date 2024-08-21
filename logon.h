@@ -6,7 +6,7 @@ namespace Ui {
 class logon;
 }
 
-class logon : public QWidget
+class logon : public QWidget//登录界面
 {
     Q_OBJECT
 
@@ -15,7 +15,7 @@ public:
     ~logon();
 
 private slots:
-    void on_pushButton_2_clicked();
+
 
     void on_pushButton_clicked();
 
